@@ -1,0 +1,265 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  background: #f7f3eb;
+  color: #2d241b;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 38px;
+}
+
+.header p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #756b60;
+}
+
+.shloka-card {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px;
+  background: #fffdf8;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.shloka-card h2 {
+  margin-top: 0;
+  font-size: 28px;
+}
+
+.chapter-info {
+  color: #8a6d3b;
+  font-size: 15px;
+  margin-bottom: 30px;
+}
+
+.sanskrit {
+  font-size: 26px;
+  line-height: 1.8;
+  margin: 30px 0;
+  white-space: pre-line;
+}
+
+.meaning {
+  margin-top: 25px;
+  padding-top: 25px;
+  border-top: 1px solid #e5ded3;
+  font-family: Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.8;
+  color: #554b42;
+}
+
+.loading {
+  text-align: center;
+  font-size: 18px;
+  color: #756b60;
+  margin-top: 60px;
+}
+
+.commentary {
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid #e5ded3;
+  text-align: left;
+}
+
+.commentary h3,
+.meaning h3 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.commentary p,
+.meaning p {
+  margin: 0;
+}
+
+.book {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  perspective: 2000px;
+}
+
+.book-page {
+  height: 600px;
+  background: #fffdf8;
+  padding: 45px;
+  position: relative;
+}
+
+.left-page {
+  border-radius: 12px 0 0 12px;
+  box-shadow: -8px 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.right-page {
+  border-radius: 0 12px 12px 0;
+  box-shadow: 8px 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.left-page::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 35px;
+  height: 100%;
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.08),
+    transparent
+  );
+  pointer-events: none;
+}
+
+.right-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 35px;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.08),
+    transparent
+  );
+  pointer-events: none;
+}
+
+.page-content {
+  height: 100%;
+  overflow: hidden;
+}
+
+.book .sanskrit {
+  margin-top: 100px;
+  font-size: 27px;
+  line-height: 2;
+  text-align: center;
+}
+
+.book .transliteration {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.book .meaning {
+  margin-top: 50px;
+  padding-top: 0;
+  border-top: none;
+}
+
+.book .commentary {
+  margin-top: 45px;
+}
+
+.book .meaning h3,
+.book .commentary h3 {
+  text-align: center;
+}
+
+.chapter-info {
+  text-align: center;
+}
+
+.commentary-section {
+  margin-top: 10px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.commentary-section h3 {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.commentary-text {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.commentary-text p {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #554b42;
+  text-align: left;
+}
+
+.commentary-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  flex-shrink: 0;
+}
+
+.commentary-navigation button {
+  padding: 5px 12px;
+  border: 1px solid #d8cdbd;
+  border-radius: 6px;
+  background: #f7f3eb;
+  color: #5c4b38;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+}
+
+.commentary-navigation button:hover:not(:disabled) {
+  background: #eee5d7;
+}
+
+.commentary-navigation button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.commentary-measure {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  visibility: hidden;
+
+  margin: 0;
+  padding: 0;
+  
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  white-space: normal;
+
+  overflow: hidden;
+}
