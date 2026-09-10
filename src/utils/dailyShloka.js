@@ -3,7 +3,7 @@ import { getChapters } from "../services/gitaApi"
 const START_DATE = new Date("2026-09-09")
 
 const START_CHAPTER = 8
-const START_VERSE = 15
+const START_VERSE = 14
 
 export async function getDailyVerse() {
   const chapters = await getChapters()

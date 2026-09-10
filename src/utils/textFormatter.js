@@ -6,10 +6,11 @@ export function formatSanskrit(text) {
   let formatted = text
 
   // Remove chapter/verse marker such as ||६-१९||
-  formatted = formatted.replace(/\|\|[^|]*\|\|/g, "")
+  formatted = formatted.replace(/(\|\|)[^|]*\|\|$/, "$1")
 
   // Replace the single pipe separating the two lines
-  formatted = formatted.replace(/\|/g, "\n")
+  formatted = formatted.replace(/\|\|/g, "॥")
+  formatted = formatted.replace(/\|/g, "।")
 
   // Convert double danda spacing to proper Sanskrit punctuation
   formatted = formatted

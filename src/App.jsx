@@ -9,23 +9,66 @@ function App() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    getDailyVerse()
-      .then(({ chapter, verse }) => {
-        return getShloka(chapter, verse)
-      })
-      .then((data) => {
-        setShloka(data)
-        setLoading(false)
-      })
-      .catch((error) => {
-        console.error(error)
-        setError("श्लोक लाने में समस्या हुई।")
-        setLoading(false)
-      })
+    loadDailyShloka()
   }, [])
+
+  async function loadDailyShloka() {
+    try {
+      const { chapter, verse } = await getDailyVerse()
+
+      const data = await getShloka(chapter, verse)
+
+      setShloka(data)
+      setLoading(false)
+    } catch (error) {
+      console.error(error)
+      setError("श्लोक लाने में समस्या हुई।")
+      setLoading(false)
+    }
+  }
+
+  async function loadShloka(chapter, verse) {
+    try {
+      setLoading(true)
+
+      const data = await getShloka(chapter, verse)
+
+      setShloka(data)
+      setLoading(false)
+    } catch (error) {
+      console.error(error)
+      setError("श्लोक लाने में समस्या हुई।")
+      setLoading(false)
+    }
+  }
+
+  async function handlePrevious() {
+    if (!shloka) {
+      return
+    }
+
+    if (shloka.verse > 1) {
+      await loadShloka(
+        shloka.chapter,
+        shloka.verse - 1
+      )
+    }
+  }
+
+  async function handleNext() {
+    if (!shloka) {
+      return
+    }
+
+    await loadShloka(
+      shloka.chapter,
+      shloka.verse + 1
+    )
+  }
 
   return (
     <main className="app">
+
       <header className="header">
         <h1>श्रीमद्भगवद्गीता</h1>
         <p>भगवान श्रीकृष्ण के दिव्य उपदेश</p>
@@ -39,7 +82,30 @@ function App() {
 
       {error && <p>{error}</p>}
 
-      {shloka && <ShlokaCard shloka={shloka} />}
+      {shloka && (
+        <>
+          <ShlokaCard shloka={shloka} />
+
+          <div className="shloka-navigation">
+            <button
+              onClick={handlePrevious}
+              disabled={
+                shloka.chapter === 1 &&
+                shloka.verse === 1
+              }
+            >
+              ← पिछला श्लोक
+            </button>
+
+            <button
+              onClick={handleNext}
+            >
+              अगला श्लोक →
+            </button>
+          </div>
+        </>
+      )}
+
     </main>
   )
 }
